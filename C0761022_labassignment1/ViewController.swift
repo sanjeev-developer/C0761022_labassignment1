@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  C0766598_labassignment1
-//
 //  Created by Sanjeev Gupta on 2020-01-15.
-//  Copyright © 2020 Rizul goyal. All rights reserved.
-//
 
 import UIKit
 import MapKit
@@ -16,13 +10,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var destination2d = CLLocationCoordinate2D()
     
     @IBOutlet var zoomStepperOutlet: UIStepper!
-    
-    enum transporttype : String
-    {
-        case automobile
-        case walking
-    }
-    
+
     var transport = false
 
     @IBOutlet var mapView: MKMapView!
@@ -169,16 +157,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let latDelta : CLLocationDegrees = 0.09
            let longDelta : CLLocationDegrees = 0.09
 
-    //        //define span
             let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
-    //
-    //
-    //        //define location
             let location = CLLocationCoordinate2D(latitude: lat, longitude: long)
-    //
-    //        //define region
             let region = MKCoordinateRegion(center: location, span: span)
-    //
     //        // set the region on the map
            mapView.setRegion(region, animated: true)
             mapView.showsUserLocation = true
@@ -189,8 +170,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func findroute(user: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, route: transporttype)
     {
 
-        
-        
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: user, addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination2d, addressDictionary: nil))
@@ -214,16 +193,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
             let route = unwrappedResponse.routes[0]
                 
-
-               
                 self.mapView.addOverlay(route.polyline)
-                
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-            
-            
     }
-       
-        
     }
     
     
@@ -247,8 +219,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                  
         findroute(user: currentlocationcoordinates, destination: destinationlocationcoordinates, route: .walking)
         
-        
-                    // print("You tapped: \(alert.title)")
                  }
 
        func autoHandler(alert: UIAlertAction){
@@ -274,7 +244,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
    
 
-
+    enum transporttype : String
+    {
+        case automobile
+        case walking
+    }
 }
 
 
